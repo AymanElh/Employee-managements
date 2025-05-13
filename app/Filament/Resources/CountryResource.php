@@ -19,7 +19,7 @@ class CountryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
     protected static ?string $navigationLabel = 'Countries';
-    protected static ?string $modelLabel = 'Employees Country';
+    protected static ?string $modelLabel = 'Country';
     protected static ?string $navigationGroup = 'System Management';
 //    protected static ?string $slug = 'employees-countries';
 
@@ -29,7 +29,16 @@ class CountryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('code')
+                    ->required()
+                    ->maxLength(3),
+                Forms\Components\TextInput::make('phonecode')
+                    ->required()
+                    ->numeric()
+                    ->maxLength(5)
             ]);
     }
 
