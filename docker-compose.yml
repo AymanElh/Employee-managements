@@ -1,0 +1,35 @@
+services:
+    db:
+        container_name: filament_postgres
+        image: postgres:latest
+        restart: always
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 2003
+            POSTGRES_DB: filament_db
+        volumes:
+            - db_data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks:
+            - laravel_network
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: filament_app
+        restart: always
+        working_dir: /var/www/html
+        volumes:
+            - .:/var/www/html
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+        networks:
+            - laravel_network
+
+volumes:
+    db_data:
+networks:
+    laravel_network:
