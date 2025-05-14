@@ -7,12 +7,14 @@ use App\Filament\Resources\EmployeeResource\RelationManagers;
 use App\Models\City;
 use App\Models\Employee;
 use App\Models\State;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -130,7 +132,10 @@ class EmployeeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('country.name'),
                 Tables\Columns\TextColumn::make('address')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('department.name')
+                    ->label('Department'),
                 Tables\Columns\TextColumn::make('zip_code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date_of_birth')
@@ -150,8 +155,35 @@ class EmployeeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
-            ])
+                // Filter By department
+                Tables\Filters\SelectFilter::make('Department')
+                    ->relationship('department', 'name')
+                    ->preload()
+                    ->label('Filter By Department')
+                    ->indicator('Department'),
+
+                // Filter to make a range of created at employees
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_at'),
+                        Forms\Components\DatePicker::make('created_until')
+                    ])
+                    ->query(function(Builder $query, array $data): Builder {
+                        return $query
+                            ->when($data['created_at'], fn($query, $date) => $query->whereDate('created_at', '>=', $date))
+                            ->when($data['created_until'], fn(Builder $query, $date) => $query->whereDate('created_at', '<=', $date));
+                    })
+                    ->indicateUsing(function(array $data): ?array {
+                        $indicators = [];
+                        if($data['created_at'] ?? null) {
+                            $indicators['created_at'] = 'Created from ' . Carbon::parse($data['created_at'])->toFormattedDateString();
+                        }
+                        if($data['created_until'] ?? null) {
+                            $indicators['created_until'] = 'Created until ' . Carbon::parse($data['created_until'])->toFormattedDateString();
+                        }
+                        return $indicators;
+                    })->columnSpan(2)->columns(2)
+            ], layout: FiltersLayout::AboveContent)->filtersFormColumns(3)
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
