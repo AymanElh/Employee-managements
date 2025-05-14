@@ -27,6 +27,7 @@ class User extends Authenticatable implements HasTenants
         'name',
         'email',
         'password',
+        'is_admin'
     ];
 
     /**
@@ -65,11 +66,6 @@ class User extends Authenticatable implements HasTenants
     public function getTenants(Panel $panel): array|Collection
     {
         return $this->teams;
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->email === 'aymanelh0001@gmail.com';
     }
 
 }
