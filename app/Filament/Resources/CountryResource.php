@@ -49,7 +49,8 @@ class CountryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('code'),
                 Tables\Columns\TextColumn::make('phonecode'),
             ])
@@ -86,7 +87,8 @@ class CountryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\StatesRelationManager::class,
+            RelationManagers\EmployeesRelationManager::class,
         ];
     }
 
