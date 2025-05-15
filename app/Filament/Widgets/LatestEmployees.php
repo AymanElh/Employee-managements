@@ -9,7 +9,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestEmployees extends BaseWidget
 {
-    protected static ?int $sort = 1;
+    protected static ?int $sort = 3;
     protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table
