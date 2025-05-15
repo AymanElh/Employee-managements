@@ -1,61 +1,154 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📘 Laravel Filament Practice Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a Laravel application built to practice and explore the **Filament admin panel** ecosystem. It includes two distinct **panels**, **multi-tenancy**, **role-based access**, and **custom widgets** for visualizing employee data.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 🧭 **Admin Panel** – Centralized control panel for managing users, tenants, and system-wide settings.
+- 🧑‍💼 **App Panel** – Tenant-specific panel focused on employee management and business operations.
+- 🌐 **Multi-Tenancy Support** – Isolates data per tenant using Filament’s multi-tenancy tools.
+- 👥 **Employee Management** – Employees linked with:
+    - 🗺️ Country
+    - 🏙️ State
+    - 🏘️ City
+    - 🏢 Department
+- 📊 **Custom Widgets**:
+    - 📈 `EmployeeChart`: Visual representation of employee statistics.
+    - 🕵️‍♂️ `LatestEmployees`: List of most recently added employees.
+- 🔐 **Authentication & Roles** – Secure login system with user roles.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 💡 What is Filament?
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**[Filament](https://filamentphp.com/)** is a modern admin panel framework for Laravel. It makes building admin interfaces faster and more enjoyable.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### ✨ Key Features of Filament
+- ⚙️ **Admin Panels** – Build feature-rich admin panels with minimal effort.
+- 📋 **Resources** – Create and manage CRUD interfaces.
+- 📦 **Widgets** – Display analytics and summaries on custom dashboards.
+- 🧾 **Forms & Tables** – Clean, powerful UI components for managing data.
+- 🧩 **Multi-Tenancy** – Scoped access per tenant with built-in support.
+- 🧑‍🎨 **Customizable** – Easily theme and extend panels to fit your app.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🛠️ Installation Guide
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Follow these steps to get the project running locally:
 
-### Premium Partners
+### 1. 📥 Clone the Repository
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+git clone https://github.com/AymanElh/Employee-managements.git
+cd Employee-managements
+```
 
-## Contributing
+### 2. 📦 Install Dependencies
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+npm install
+```
 
-## Code of Conduct
+### 3. ⚙️ Set Up Environment
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+### 4. 🧬 Run Migrations & Seeders
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate --seed
+```
 
-## License
+### 5. ▶️ Start the Development Server
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan serve
+```
+
+---
+
+## 🧱 Project Structure
+
+| Folder/File               | Description                            |
+| ------------------------- | -------------------------------------- |
+| `app/Models`              | Eloquent models (User, Employee, etc.) |
+| `app/Filament/AdminPanel` | Resources and pages for Admin Panel    |
+| `app/Filament/AppPanel`   | Resources and pages for Tenant Panel   |
+| `app/Filament/Widgets`    | Custom dashboard widgets               |
+
+---
+
+## 🧑‍💻 Filament Usage Examples
+
+### 🧰 Install Filament
+
+```bash
+composer require filament/filament:"^3.3" -W
+php artisan filament:install --panels
+```
+
+### 🛡️ Create a New Panel
+
+```bash
+php artisan make:filament-panel
+```
+
+### 🧾 Create a Resource (e.g., Employee CRUD)
+
+```bash
+php artisan make:filament-resource Employee
+```
+
+### 📊 Create a Custom Widget
+
+```bash
+php artisan make:filament-widget EmployeeChart
+```
+
+---
+
+## 🏢 Multi-Tenancy Notes
+
+This project uses **Filament’s built-in multi-tenancy**. Tenant data is scoped using Eloquent relationships, likely via a `Tenant` or `Company` model.
+
+You can define tenant-specific queries using:
+
+```php
+Employee::whereBelongsTo(auth()->user()->tenant)->get();
+```
+
+---
+
+## 🔐 Roles & Access
+
+* Uses Laravel’s authentication system.
+* Role-based access for Admin vs. Tenant users.
+
+---
+
+🔗 For more details, visit the official Filament docs at https://filamentphp.com/docs
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
+
+---
+
+## 👨‍💻 Author
+
+Built with ❤️ by [Ayman Elh](https://www.github.com/AymanElh)
